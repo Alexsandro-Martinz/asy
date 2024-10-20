@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Saiba Mais{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="mb-5 text-center">Sobre o Nosso Asilo</h1>
+            <p>Nosso asilo é dedicado a oferecer cuidados e serviços de qualidade para idosos que precisam de assistência e acompanhamento especializado. Contamos com uma equipe de profissionais de saúde altamente capacitados, incluindo médicos, enfermeiros, fisioterapeutas e cuidadores, para garantir o bem-estar e a qualidade de vida dos nossos residentes.</p>
+
+            <h2 class="mt-5">Serviços Oferecidos</h2>
+            <ul class="list-group mb-4">
+                <li class="list-group-item">Acompanhamento médico especializado</li>
+                <li class="list-group-item">Enfermagem 24 horas</li>
+                <li class="list-group-item">Atividades físicas e fisioterapia</li>
+                <li class="list-group-item">Apoio psicológico e social</li>
+                <li class="list-group-item">Alimentação balanceada e personalizada</li>
+            </ul>
+
+            <h2 class="mt-5">Cadastro de Profissionais de Saúde</h2>
+            <p>Profissionais de saúde que desejam se juntar à nossa equipe podem se cadastrar através do nosso sistema. Uma vez registrados, eles terão acesso a informações dos pacientes para melhor acompanhamento e poderão atualizar os prontuários conforme necessário.</p>
+
+            <h2 class="mt-5">Cadastro de Pacientes</h2>
+            <p>Os pacientes também são cadastrados em nosso sistema, onde informações importantes como histórico médico, prescrições, e plano de cuidados são mantidas e atualizadas por nossos profissionais. Assim, garantimos que todas as necessidades de nossos residentes sejam atendidas de forma personalizada e eficiente.</p>
+
+            <h2 class="mt-5">Entre em Contato</h2>
+            <p>Se você deseja saber mais sobre nossos serviços ou como se cadastrar como profissional de saúde, por favor, entre em contato conosco através da <a href="{% url 'contato' %}">página de contato</a>.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

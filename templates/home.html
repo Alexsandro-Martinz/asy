@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1 class="display-4">Bem-vindo ao Nosso Asilo</h1>
+            <p class="lead">Cuidando com carinho e atenção, garantindo o bem-estar dos nossos residentes.</p>
+            <a class="btn btn-primary btn-lg mt-3" href="{% url 'sobre' %}" role="button">Saiba Mais</a>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{% static 'images/cuidados.jpg' %}" class="card-img-top" alt="Cuidados">
+                <div class="card-body">
+                    <h5 class="card-title">Cuidados Personalizados</h5>
+                    <p class="card-text">Oferecemos serviços de cuidados personalizados, adaptados às necessidades de cada residente.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{% static 'images/equipe.jpg' %}" class="card-img-top" alt="Equipe">
+                <div class="card-body">
+                    <h5 class="card-title">Equipe Especializada</h5>
+                    <p class="card-text">Nossa equipe conta com profissionais de saúde capacitados, disponíveis 24 horas por dia.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{% static 'images/atividades.jpg' %}" class="card-img-top" alt="Atividades">
+                <div class="card-body">
+                    <h5 class="card-title">Atividades e Bem-Estar</h5>
+                    <p class="card-text">Proporcionamos atividades físicas, recreativas e sociais para promover a qualidade de vida.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h2>Entre em Contato</h2>
+            <p>Gostaria de saber mais sobre nossos serviços ou tem alguma dúvida? Visite nossa página de contato.</p>
+            <a class="btn btn-secondary btn-lg mt-3" href="{% url 'contato' %}" role="button">Contato</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
