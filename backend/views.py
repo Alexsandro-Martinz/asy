@@ -35,3 +35,38 @@ def contato(request):
         form = ContatoForm()
 
     return render(request, 'contato.html', {'form': form})
+
+from django.contrib.auth.decorators import login_required
+
+
+@login_required
+def dashboard(request):
+    # Obtenha o usuário logado
+    user = request.user
+    
+    # Exemplo de dados que podem ser mostrados com base no tipo de usuário
+    if user.user_type == 'administrador':
+        context = {
+            'title': 'Admin Dashboard',
+            'message': 'Bem-vindo, Administrador!',
+            # Aqui você pode incluir dados administrativos
+        }
+    elif user.user_type == 'medico':
+        context = {
+            'title': 'Médico Dashboard',
+            'message': 'Bem-vindo, Doutor!',
+            # Dados específicos do médico
+        }
+    elif user.user_type == 'enfermeiro':
+        context = {
+            'title': 'Enfermeiro Dashboard',
+            'message': 'Bem-vindo, Enfermeiro!',
+            # Dados específicos do enfermeiro
+        }
+    else:
+        context = {
+            'title': 'Dashboard',
+            'message': 'Bem-vindo!',
+        }
+
+    return render(request, 'dashboard.html', context)
