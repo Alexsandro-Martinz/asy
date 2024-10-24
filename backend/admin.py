@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from backend.models.ProfissionalSaudeModel import ProfissionalSaude
+
+
+@admin.register(ProfissionalSaude)
+class ProfissionalSaudeAdmin(admin.ModelAdmin):
+    pass

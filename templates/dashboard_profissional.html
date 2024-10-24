@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Profissional de Saúde{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Próximas Consultas</h5>
+                    <p class="card-text">{{ proximas_consultas }} consultas agendadas</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Pacientes Atendidos</h5>
+                    <p class="card-text">{{ pacientes_atendidos }} pacientes no total</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Consultas de Hoje</h5>
+                    <p class="card-text">{{ consultas_hoje }} consultas agendadas</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabela de Consultas Recentes -->
+    <h3 class="mt-4">Consultas Recentes</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Paciente</th>
+                <th>Diagnóstico</th>
+                <th>Opções</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for consulta in consultas %}
+            <tr>
+                <td>{{ consulta.data_consulta }}</td>
+                <td>{{ consulta.paciente.nome }}</td>
+                <td>{{ consulta.diagnostico }}</td>
+                <td><a href="{% url 'detalhes_consulta' consulta.id %}" class="btn btn-primary">Ver Detalhes</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

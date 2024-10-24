@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Administrador{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total de Pacientes</h5>
+                    <p class="card-text">{{ total_pacientes }} pacientes cadastrados</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-secondary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total de Profissionais</h5>
+                    <p class="card-text">{{ total_profissionais }} profissionais de saúde cadastrados</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Consultas Agendadas</h5>
+                    <p class="card-text">{{ consultas_agendadas }} consultas futuras</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabela de Usuários -->
+    <h3 class="mt-4">Gestão de Usuários</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Tipo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.nome_completo }}</td>
+                <td>{{ usuario.cpf }}</td>
+                <td>{{ usuario.tipo }}</td>
+                <td>
+                    <a href="" class="btn btn-warning">Editar</a>
+                    <a href="" class="btn btn-danger">Deletar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
