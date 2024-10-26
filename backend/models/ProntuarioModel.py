@@ -1,9 +1,12 @@
 from django.db import models
 
+from backend.models.MedicoModel import Medico
+from backend.models.PacienteModel import Paciente
+
 class Prontuario(models.Model):
     # Relacionamentos
-    paciente = models.ForeignKey('Paciente', on_delete=models.CASCADE)
-    profissional = models.ForeignKey('ProfissionalSaude', on_delete=models.CASCADE)
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    medico = models.ForeignKey(Medico, on_delete=models.CASCADE)
     
     # Dados da Consulta
     data_consulta = models.DateField(auto_now_add=True)

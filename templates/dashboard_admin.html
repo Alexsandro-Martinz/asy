@@ -31,7 +31,15 @@
     </div>
 
     <!-- Tabela de Usuários -->
-    <h3 class="mt-4">Gestão de Usuários</h3>
+     <!-- As a heading -->
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <span class="navbar-brand my-3">Gestão de Usuários</span>
+        <div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastrar Novo Usuário</button>
+        </div>
+    </nav>
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -42,6 +50,7 @@
             </tr>
         </thead>
         <tbody>
+            {% if usuarios %}
             {% for usuario in usuarios %}
             <tr>
                 <td>{{ usuario.nome_completo }}</td>
@@ -53,6 +62,13 @@
                 </td>
             </tr>
             {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="4">Nenhum Usuário Cadastrado</td>
+            </tr>
+            {% endif %}
         </tbody>
     </table>
+
+
 {% endblock %}

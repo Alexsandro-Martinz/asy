@@ -1,22 +1,16 @@
 from datetime import date
-from django.shortcuts import redirect, render
-from django.conf import settings
+
 from django.contrib import messages
-
-from django.core.mail import send_mail
-
 from django.contrib.auth.decorators import login_required
-
-from backend.models.AdministradorModel import Administrador
-from backend.models.ContactModel import Contact
-
 from django.contrib.auth.models import User
+from django.shortcuts import redirect, render
 
+from backend.models.MedicoModel import Medico
 from backend.models.PacienteModel import Paciente
-from backend.models.ProfissionalSaudeModel import ProfissionalSaude
 from backend.models.ProntuarioModel import Prontuario
 
 from .forms import ContatoForm
+
 
 def dashboard(request):
     """View rendering the dashboard for the user type."""
@@ -63,12 +57,19 @@ def contato(request):
 
 # Dashboard para Profissionais de Saúde
 @login_required
-def dashboard_profissional(request):
+def medico_dashboard(request):
     
+    user = getattr(request, 'user', None)
+    medico = Medico.objects.filter(user=user).first()
+    if not medico:
+        messages.error(request, 'Erro ao acessar o dashboard. Verifique se o profissional está cadastrado corretamente.')
+        return redirect('/')
+    
+   
     try:
-        consultas_hoje = Prontuario.objects.filter(profissional=request.user.profissionalsaude, data_consulta=date.today())
-        proximas_consultas = Prontuario.objects.filter(profissional=request.user.profissionalsaude, data_consulta__gte=date.today()).count()
-        pacientes_atendidos = Prontuario.objects.filter(profissional=request.user.profissionalsaude).values('paciente').distinct().count()
+        consultas_hoje = Prontuario.objects.filter(medico=medico, data_consulta=date.today())
+        proximas_consultas = Prontuario.objects.filter(medico=medico, data_consulta__gte=date.today()).count()
+        pacientes_atendidos = Prontuario.objects.filter(medico=medico).values('paciente').distinct().count()
 
         context = {
             'consultas_hoje': consultas_hoje,
@@ -77,7 +78,7 @@ def dashboard_profissional(request):
             'consultas': consultas_hoje,
         }
         return render(request, 'dashboard_profissional.html', context)
-    except AttributeError:  # Null pointer reference
+    except AttributeError as e:  # Null pointer reference end prevent superuser from accessing dashboard
         messages.error(request, 'Erro ao acessar o dashboard. Verifique se o profissional está cadastrado corretamente.')
         return redirect('/')
     except Exception as e:  # Unhandled exception
@@ -88,9 +89,9 @@ def dashboard_profissional(request):
 @login_required
 def dashboard_admin(request):
     total_pacientes = Paciente.objects.count()
-    total_profissionais = ProfissionalSaude.objects.count()
+    total_profissionais = User.objects.filter(is_superuser=False).count()
     consultas_agendadas = Prontuario.objects.filter(data_consulta__gte=date.today()).count()
-    usuarios = User.objects.all()
+    usuarios = User.objects.filter(is_superuser=False)
 
     context = {
         'total_pacientes': total_pacientes,
