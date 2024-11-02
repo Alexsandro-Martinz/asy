@@ -1,0 +1,33 @@
+<!-- profile_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Lista de Perfis</h2>
+    <a href="{% url 'profile_create' %}" class="btn btn-primary mb-3">Novo Perfil</a>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Tipo de Usuário</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for profile in profiles %}
+                <tr>
+                    <td>{{ profile.id }}</td>
+                    <td>{{ profile.first_name }} {{ profile.last_name }}</td>
+                    <td>{{ profile.get_user_type_display }}</td>
+                    <td>{{ profile.email }}</td>
+                    <td>
+                        <a href="{% url 'profile_update' profile.pk %}" class="btn btn-sm btn-warning">Editar</a>
+                        <a href="{% url 'profile_delete' profile.pk %}" class="btn btn-sm btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

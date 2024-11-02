@@ -1,0 +1,12 @@
+<!-- profile_confirm_delete.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Excluir Perfil</h2>
+    <p>Tem certeza de que deseja excluir o perfil de {{ profile.first_name }} {{ profile.last_name }}?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sim, excluir</button>
+        <a href="{% url 'profile_list' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

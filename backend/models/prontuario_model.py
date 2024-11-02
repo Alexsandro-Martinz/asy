@@ -1,7 +1,8 @@
 from django.db import models
 
-from backend.models.MedicoModel import Medico
-from backend.models.PacienteModel import Paciente
+from backend.models.medico_model import Medico
+from backend.models.paciente_model import Paciente
+
 
 class Prontuario(models.Model):
     # Relacionamentos

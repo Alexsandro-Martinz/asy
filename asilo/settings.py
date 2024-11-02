@@ -59,7 +59,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR / "templates")
+            os.path.join(BASE_DIR / "templates"),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -144,4 +144,10 @@ MESSAGE_TAGS = {
             messages.WARNING: 'alert-warning',
             messages.ERROR: 'alert-danger',
         }
-    
+
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 24 * 60 * 60  # 24 horas
+
+# Configure o Custom User Model
+AUTH_USER_MODEL = 'backend.Profile'

@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from backend.models.MedicoModel import Medico, MedicoEspecialidade
-from backend.models.PacienteModel import Paciente
-from backend.models.ProntuarioModel import Prontuario
+from backend.models.medico_model import Medico, MedicoEspecialidade
+from backend.models.paciente_model import Paciente
+from backend.models.prontuario_model import Prontuario
 
 admin.site.site_header = 'Asilo'
 admin.site.site_title = 'Asilo'

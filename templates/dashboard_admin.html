@@ -8,7 +8,7 @@
             <div class="card bg-primary text-white">
                 <div class="card-body">
                     <h5 class="card-title">Total de Pacientes</h5>
-                    <p class="card-text">{{ total_pacientes }} pacientes cadastrados</p>
+                    <p class="card-text">{{ amount_pacientes }} paciente{{ amount_pacientes|pluralize }} cadastrado{{ total_pacientes|pluralize }}</p>
                 </div>
             </div>
         </div>
@@ -16,7 +16,7 @@
             <div class="card bg-secondary text-white">
                 <div class="card-body">
                     <h5 class="card-title">Total de Profissionais</h5>
-                    <p class="card-text">{{ total_profissionais }} profissionais de saúde cadastrados</p>
+                    <p class="card-text">{{amount_medicos }} profissional{{ amount_medicos|pluralize }} de saúde cadastrado{{ total_profissionais|pluralize }}</p>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
             <div class="card bg-success text-white">
                 <div class="card-body">
                     <h5 class="card-title">Consultas Agendadas</h5>
-                    <p class="card-text">{{ consultas_agendadas }} consultas futuras</p>
+                    <p class="card-text">{{ consultas_agendadas }} consulta{{ consultas_agendadas|pluralize }} futura{{ consultas_agendadas|pluralize }}</p>
                 </div>
             </div>
         </div>
@@ -53,9 +53,9 @@
             {% if usuarios %}
             {% for usuario in usuarios %}
             <tr>
-                <td>{{ usuario.nome_completo }}</td>
+                <td>{{ usuario.first_name }}</td>
                 <td>{{ usuario.cpf }}</td>
-                <td>{{ usuario.tipo }}</td>
+                <td>{{ usuario.user_type}}</td>
                 <td>
                     <a href="" class="btn btn-warning">Editar</a>
                     <a href="" class="btn btn-danger">Deletar</a>
