@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "backend",
-]
+    'bootstrapform']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -149,5 +149,3 @@ MESSAGE_TAGS = {
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 24 * 60 * 60  # 24 horas
 
-# Configure o Custom User Model
-AUTH_USER_MODEL = 'backend.Profile'

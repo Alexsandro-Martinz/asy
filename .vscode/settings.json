@@ -1,3 +1,5 @@
 {
-    "cSpell.language": "en,pt-BR,pt"
+    "cSpell.language": "en,pt-BR,pt",
+    "python.analysis.indexing": true,
+    "python.analysis.autoImportCompletions": true,
 }

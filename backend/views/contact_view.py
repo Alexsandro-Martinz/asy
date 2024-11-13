@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
 
-from backend.forms.contact_form import ContatoForm
+from backend.forms.contato_form import ContatoForm
 
 
 def contato(request):

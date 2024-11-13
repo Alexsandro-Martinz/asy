@@ -5,23 +5,21 @@ from django.shortcuts import render
 
 from backend.models.medico_model import Medico
 from backend.models.paciente_model import Paciente
-from backend.models.profile_model import Profile
 from backend.models.prontuario_model import Prontuario
 
 
 # Dashboard para Administradores
 @login_required
 def dashboard_admin(request):
-    amount_pacientes = Paciente.objects.count()
-    amount_medicos = Medico.objects.filter(profile__is_superuser=False).count()
-    consultas_agendadas = Prontuario.objects.filter(data_consulta__gte=date.today()).count()
-    usuarios = Profile.objects.filter(is_superuser=False)
-
-    context = {
-        'amount_pacientes': amount_pacientes,
-        'amount_medicos': amount_medicos,
-        'consultas_agendadas': consultas_agendadas,
-        'usuarios': usuarios,
-    }
-    return render(request, 'dashboard_admin.html', context)
+    paciente_qtd = Paciente.objects.count()
+    print(paciente_qtd)
+    medico_qtd = Medico.objects.filter().count()
+    consultas_agendadas_qtd = Prontuario.objects.filter(data_consulta__gte=date.today()).count()
+    cards = [
+        {'title': 'Total de Pacientes', 'value': paciente_qtd, 'url': "/paciente_list"},
+        {'title': 'Total de Profissionais', 'value': medico_qtd},
+        {'title': 'Consultas Agendadas', 'value': consultas_agendadas_qtd},
+        {'title': 'Consultas de Hoje', 'value': Prontuario.objects.filter(data_consulta=date.today()).count()}
+    ]
+    return render(request, 'dashboard_admin.html', {'cards': cards})
 

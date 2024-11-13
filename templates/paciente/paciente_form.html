@@ -1,0 +1,21 @@
+<!-- profile_form.html -->
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-10">
+        <h1>Cadastrar Paciente</h1>
+
+        <form method="post" >
+          {% csrf_token %}
+          {% for form in forms %}
+          <h2 class="form-title mt-4">{{ form.title }}</h2>
+          {{ form|bootstrap_horizontal:'col-md-4' }}
+          {% endfor %}
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+        <a href="{% url 'paciente_list' %}">Voltar</a>
+      </div>
+    </div>
+{% endblock %}

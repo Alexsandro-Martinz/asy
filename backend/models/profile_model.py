@@ -1,20 +1,9 @@
 from datetime import date
 
-from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
-class Profile(AbstractUser):
-    
-    ADMIN = 'admin'
-    DOCTOR = 'doctor'
-    PATIENT = 'patient'
-    
-    USER_TYPE_CHOICES = {
-        ADMIN : 'Administrator',
-        DOCTOR : 'Doctor',
-        PATIENT : 'Patient',
-    }
+class Profile(models.Model):
     
     MASCULINO = 'masculino'
     FEMININO = 'feminino'
@@ -25,9 +14,7 @@ class Profile(AbstractUser):
         FEMININO : 'Feminino',
         OUTRO : 'Outro',
     }
-    
-    is_superuser = models.BooleanField(default=False)
-    user_type = models.CharField(max_length=20, choices=USER_TYPE_CHOICES)
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     first_name = models.CharField(max_length=255, default="")
     last_name = models.CharField(max_length=255, default="")
@@ -42,7 +29,7 @@ class Profile(AbstractUser):
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
     def __str__(self):
-        return self.full_name
+        return self.full_name()
     
     def get_age(self):
         if self.birth_date:

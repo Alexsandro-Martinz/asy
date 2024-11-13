@@ -3,72 +3,31 @@
 {% block title %}Dashboard - Administrador{% endblock %}
 
 {% block content %}
+    {% if cards %}
     <div class="row">
-        <div class="col-md-4">
-            <div class="card bg-primary text-white">
-                <div class="card-body">
-                    <h5 class="card-title">Total de Pacientes</h5>
-                    <p class="card-text">{{ amount_pacientes }} paciente{{ amount_pacientes|pluralize }} cadastrado{{ total_pacientes|pluralize }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card bg-secondary text-white">
-                <div class="card-body">
-                    <h5 class="card-title">Total de Profissionais</h5>
-                    <p class="card-text">{{amount_medicos }} profissional{{ amount_medicos|pluralize }} de saúde cadastrado{{ total_profissionais|pluralize }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card bg-success text-white">
-                <div class="card-body">
-                    <h5 class="card-title">Consultas Agendadas</h5>
-                    <p class="card-text">{{ consultas_agendadas }} consulta{{ consultas_agendadas|pluralize }} futura{{ consultas_agendadas|pluralize }}</p>
-                </div>
+    <div class="col-md-3 mb-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Title</h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    Card Subtitle
+                </h6>
+                <a href="#" class="card-link">Ver detalhes</a>
             </div>
         </div>
     </div>
-
-    <!-- Tabela de Usuários -->
-     <!-- As a heading -->
-    <nav class="navbar navbar-light bg-light justify-content-between">
-        <span class="navbar-brand my-3">Gestão de Usuários</span>
-        <div>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastrar Novo Usuário</button>
-        </div>
-    </nav>
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>CPF</th>
-                <th>Tipo</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% if usuarios %}
-            {% for usuario in usuarios %}
-            <tr>
-                <td>{{ usuario.first_name }}</td>
-                <td>{{ usuario.cpf }}</td>
-                <td>{{ usuario.user_type}}</td>
-                <td>
-                    <a href="" class="btn btn-warning">Editar</a>
-                    <a href="" class="btn btn-danger">Deletar</a>
-                </td>
-            </tr>
-            {% endfor %}
-            {% else %}
-            <tr>
-                <td colspan="4">Nenhum Usuário Cadastrado</td>
-            </tr>
-            {% endif %}
-        </tbody>
-    </table>
-
+        {% for card in cards %}    
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body ">
+                            <h5 class="card-title">{{ card.title }}</h5>
+                            <p class="card-text">{{ card.value }}</p>
+                            <a href="{{ card.url }}" class="btn btn-primary">Acessar</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+    {% endif %}
 
 {% endblock %}
