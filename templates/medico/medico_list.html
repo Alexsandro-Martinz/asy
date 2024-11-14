@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Medicos{% endblock %}
+    
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3 justify-content-between">
+    <h2 >Lista de Medicos</h2>
+    <a href="{% url 'medico_create' %}" class="btn btn-primary">Novo Medico</a>
+</nav>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Cpf</th>
+            <th>Nome do Responsável</th>
+            <th>Contato Responsável</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if medicos %}
+            {% for paciente in medicos %}
+                <tr>
+                    <td>{{ paciente.id }}</td>
+                    <td>{{ paciente.full_name }}</td>
+                    <td>{{ paciente.cpf }}</td>
+                    <td>{{ paciente.nome_responsavel }}</td>
+                    <td>{{ paciente.contato_responsavel }}</td>
+                    <td>
+                        <a href="" class="btn btn-sm btn-primary">Ver</a>
+                        <a href="" class="btn btn-sm btn-warning">Editar</a>
+                        <a href="" class="btn btn-sm btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="6">Nenhum medico cadastrado.</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+{% endblock %}

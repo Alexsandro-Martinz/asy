@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.contrib.auth.models import User
 
 from backend.models.medico_model import Medico, MedicoEspecialidade
 from backend.models.paciente_model import Paciente

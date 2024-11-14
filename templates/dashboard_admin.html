@@ -3,15 +3,16 @@
 {% block title %}Dashboard - Administrador{% endblock %}
 
 {% block content %}
+    <h1 class="text-center m-5">Painel do Administrador</h1>
     {% if cards %}
-    <div class="row">
+    <div class="row mt-5">
         {% for card in cards %}    
-                <div class="col-md-4 mb-4">
-                    <div class="card">
+                <div class="col-md-4 mb-5">
+                    <div class="card text-center m-auto bg-light shadow" style="width: 14rem;">
                         <div class="card-body ">
-                            <h5 class="card-title">{{ card.title }}</h5>
-                            <p class="card-text">{{ card.value }}</p>
-                            <a href="{{ card.url }}" class="btn btn-primary">Acessar</a>
+                            <h3 class="card-title fs-3">{{ card.title }}</h3>
+                            <p class="card-text mb-2 text-muted fs-4">{{ card.subtitle }}</p>
+                            <a href="{{card.url}}" class="card-link fs-5">Acessar</a>
                         </div>
                     </div>
                 </div>

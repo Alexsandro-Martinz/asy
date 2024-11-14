@@ -1,5 +1,3 @@
-from math import e
-
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
@@ -11,14 +9,17 @@ from backend.models.paciente_model import Paciente
 
 
 @login_required
+def paciente_delete(request):
+    pass
+
+@login_required
 def paciente_list(request):
     pacientes = Paciente.objects.all()
     return render(request, 'paciente/paciente_list.html', {'pacientes': pacientes})
 
 @login_required
 def paciente_create(request):
-    
-    
+
     if request.method == 'POST':
         user_form_instance = UserForm(request.POST)
         paciente_form_instance = PacienteForm(request.POST)

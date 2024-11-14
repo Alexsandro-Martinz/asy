@@ -12,14 +12,12 @@ from backend.models.prontuario_model import Prontuario
 @login_required
 def dashboard_admin(request):
     paciente_qtd = Paciente.objects.count()
-    print(paciente_qtd)
     medico_qtd = Medico.objects.filter().count()
     consultas_agendadas_qtd = Prontuario.objects.filter(data_consulta__gte=date.today()).count()
     cards = [
-        {'title': 'Total de Pacientes', 'value': paciente_qtd, 'url': "/paciente_list"},
-        {'title': 'Total de Profissionais', 'value': medico_qtd},
-        {'title': 'Consultas Agendadas', 'value': consultas_agendadas_qtd},
-        {'title': 'Consultas de Hoje', 'value': Prontuario.objects.filter(data_consulta=date.today()).count()}
+        {'title': 'Pacientes', 'subtitle': f'Total: {paciente_qtd}', 'url': '/paciente/list'},
+        {'title': 'Medicos', 'subtitle': f'Total: {medico_qtd}', 'url': '/medico/list'},
+        {'title': 'Prontuários', 'subtitle': f'Total: {consultas_agendadas_qtd}'},
     ]
     return render(request, 'dashboard_admin.html', {'cards': cards})
 

@@ -2,7 +2,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import path
 from django.views.generic import TemplateView
 
-from backend.views import pacientes_view
+from backend.views import medico_view, pacientes_view
 
 from .views.admin_dashboad_view import dashboard_admin
 from .views.contact_view import contato
@@ -17,6 +17,9 @@ urlpatterns = [
     path('dashboard/admin/', dashboard_admin, name='dashboard_admin'),
     path('dashboard/', dashboard, name='dashboard'),
     
-    path('paciente_list/', pacientes_view.paciente_list, name='paciente_list'),
-    path('paciente_create/', pacientes_view.paciente_create, name='paciente_create'),
+    path('paciente/list/', pacientes_view.paciente_list, name='paciente_list'),
+    path('paciente/create/', pacientes_view.paciente_create, name='paciente_create'),
+    
+    path('medico/list/', medico_view.medico_list, name='medico_list'),
+    path('medico/create/', medico_view.medico_create, name='medico_create'),
  ]
