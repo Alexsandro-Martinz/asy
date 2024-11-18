@@ -11,13 +11,13 @@ class MedicoEspecialidade(models.Model):
     
     def __str__(self):
         return self.nome
-    
+
 
 class Medico(Profile):
     crm = models.CharField(max_length=10)
     especialidades = models.ManyToManyField(MedicoEspecialidade)
 
     def __str__(self):
-        return self.profile.get_full_name()
+        return self.full_name()
     
 

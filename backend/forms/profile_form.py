@@ -12,7 +12,7 @@ class ProfileForm(forms.ModelForm):
         fields = ('phone_number', 'first_name', 'last_name', 'email', 'cpf', 'rg', 'birth_date', 'address', 'estado_civil', 'genero')
 
         widget = {
-            'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone_number': forms.TextInput(attrs={'class': 'form-control', 'type': 'tel'}),
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),

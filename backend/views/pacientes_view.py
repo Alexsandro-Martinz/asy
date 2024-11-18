@@ -9,8 +9,16 @@ from backend.models.paciente_model import Paciente
 
 
 @login_required
-def paciente_delete(request):
-    pass
+def paciente_delete(request, id):
+    try:
+        paciente = Paciente.objects.get(pk=id)
+        paciente.delete()
+        messages.success(request, "Paciente excluído com sucesso!")
+    except Paciente.DoesNotExist:
+        messages.error(request, "Paciente não encontrado.")
+    except Exception as e:
+        messages.error(request, f"Ocorreu um erro ao excluir o paciente: {str(e)}")
+    return redirect('paciente_list')
 
 @login_required
 def paciente_list(request):
@@ -31,7 +39,7 @@ def paciente_create(request):
         for form in forms:
             if not form.is_valid():
                 messages.add_message(request, messages.ERROR, form.errors.as_text())     
-                return redirect('paciente_create', {'forms': forms})
+                return render(request, 'paciente/paciente_create.html', {'forms': forms})
 
         new_user = user_form_instance.save()
         new_paciente = paciente_form_instance.save(commit=False)
@@ -47,4 +55,17 @@ def paciente_create(request):
             PacienteForm()
         ],
     }
-    return render(request, 'paciente/paciente_form.html', context)
+    return render(request, 'paciente/paciente_create.html', context)
+
+
+@login_required
+def paciente_detail(request, id):
+    try:
+        paciente = Paciente.objects.get(pk=id)
+    except Paciente.DoesNotExist:
+        messages.add_message(request, messages.ERROR, "Paciente não encontrado.")
+        return redirect('paciente_list')
+    except Exception as e:
+        messages.add_message(request, messages.ERROR, f"Ocorreu um erro ao carregar o paciente: {str(e)}")
+        return redirect('paciente_list')
+    return render(request, 'paciente/paciente_detail.html', {'paciente': paciente})

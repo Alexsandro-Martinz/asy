@@ -19,7 +19,10 @@ urlpatterns = [
     
     path('paciente/list/', pacientes_view.paciente_list, name='paciente_list'),
     path('paciente/create/', pacientes_view.paciente_create, name='paciente_create'),
+    path('paciente/delete/<int:id>', pacientes_view.paciente_delete, name='paciente_delete'),
+    path('paciente/detail/<int:id>', pacientes_view.paciente_detail, name='paciente_detail'),
     
     path('medico/list/', medico_view.medico_list, name='medico_list'),
     path('medico/create/', medico_view.medico_create, name='medico_create'),
+    
  ]

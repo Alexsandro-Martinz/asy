@@ -12,8 +12,8 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Nome</th>
-            <th>Cpf</th>
+            <th>Nome do Paciente</th>
+            <th>Contato do Paciente</th>
             <th>Nome do Responsável</th>
             <th>Contato Responsável</th>
             <th>Ações</th>
@@ -25,13 +25,18 @@
                 <tr>
                     <td>{{ paciente.id }}</td>
                     <td>{{ paciente.full_name }}</td>
-                    <td>{{ paciente.cpf }}</td>
-                    <td>{{ paciente.nome_responsavel }}</td>
-                    <td>{{ paciente.contato_responsavel }}</td>
+                    <td>{{ paciente.phone_number}}</td>
+                    <td>{{ paciente.nome_responsavel|title }}</td>
+                    <td>{{ paciente.telefone_responsavel }}</td>
                     <td>
-                        <a href="" class="btn btn-sm btn-primary">Ver</a>
+                        <a href="{% url 'paciente_detail' paciente.id %}" class="btn btn-sm btn-warning">Ver</a>
+                        
                         <a href="" class="btn btn-sm btn-warning">Editar</a>
-                        <a href="" class="btn btn-sm btn-danger">Excluir</a>
+                        <form action="{% url 'paciente_delete' paciente.id %}" 
+                        onsubmit="return confirm('Tem certeza de que deseja excluir o paciente {{ paciente.full_name|title}}?')"
+                        method="delete" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-danger">Excluir</button></form>
                     </td>
                 </tr>
             {% endfor %}
