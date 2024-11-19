@@ -1,6 +1,9 @@
+from gc import get_freeze_count
+import profile
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
+from django.contrib.auth.models import User
 
 from backend.forms.paciente_form import PacienteForm
 from backend.forms.profile_form import ProfileForm
@@ -31,6 +34,7 @@ def paciente_create(request):
     if request.method == 'POST':
         user_form_instance = UserForm(request.POST)
         paciente_form_instance = PacienteForm(request.POST)
+        
         forms = [
             user_form_instance,
             paciente_form_instance
@@ -69,3 +73,23 @@ def paciente_detail(request, id):
         messages.add_message(request, messages.ERROR, f"Ocorreu um erro ao carregar o paciente: {str(e)}")
         return redirect('paciente_list')
     return render(request, 'paciente/paciente_detail.html', {'paciente': paciente})
+
+
+@login_required
+def paciente_update(request, id):
+    paciente = Paciente.objects.get(pk=id)
+    
+    if request.method == 'POST':
+        paciente_form_instance = PacienteForm(request.POST, instance=paciente)
+        
+        if not paciente_form_instance.is_valid():
+            messages.add_message(request, messages.ERROR, paciente_form_instance.errors.as_text())     
+            return render(request, 'paciente/paciente_update.html', {'form': paciente_form_instance})
+
+        paciente_form_instance.save()
+        messages.add_message(request, messages.SUCCESS, "Paciente salvo com sucesso!")
+        return redirect("paciente_list")
+    
+    form = PacienteForm(instance=paciente)
+    
+    return render(request, 'paciente/paciente_update.html', {'form': form, 'birth_date': paciente.birth_date.isoformat()})

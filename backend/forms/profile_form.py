@@ -3,13 +3,14 @@ from cProfile import label
 from django import forms
 
 from backend.models.profile_model import Profile
-
+    
 
 class ProfileForm(forms.ModelForm):
     title = "Informações Pessoais"
     class Meta:
         model = Profile
-        fields = ('phone_number', 'first_name', 'last_name', 'email', 'cpf', 'rg', 'birth_date', 'address', 'estado_civil', 'genero')
+        fields = ('phone_number', 'first_name', 'last_name', 'birth_date'
+                  , 'email', 'cpf', 'rg', 'birth_date', 'address', 'estado_civil', 'genero')
 
         widget = {
             'phone_number': forms.TextInput(attrs={'class': 'form-control', 'type': 'tel'}),
@@ -18,10 +19,11 @@ class ProfileForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'cpf': forms.TextInput(attrs={'class': 'form-control'}),
             'rg': forms.TextInput(attrs={'class': 'form-control'}),
-            'birth_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'birth_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date', 'input_format': '%d-%m-%Y'}),
             'address': forms.TextInput(attrs={'class': 'form-control'}),
             'estado_civil': forms.Select(attrs={'class': 'form-control'}),
             'genero': forms.Select(attrs={'class': 'form-control'}),
+            'birth_date': forms.SelectDateWidget(attrs={'class': 'form-control', 'type': 'date'}),
         }
         
         labels = {

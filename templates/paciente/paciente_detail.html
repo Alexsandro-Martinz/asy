@@ -5,7 +5,7 @@
 {% block content %}
 <div class="row justify-content-center">
   <div class="col-md-6">
-        <h1>Detalhes do Paciente</h1>
+        <h1 class="text-center my-4">Detalhes do Paciente</h1>
 
         {% if paciente %}
           <table class="table table-bordered border-primary">
@@ -14,16 +14,12 @@
               <td class="text-capitalize ">{{ paciente.full_name }} </td>
             </tr>
             <tr>
-              <td><strong>Data de Nascimento:</strong></td>
-              <td>{{ paciente.data_nascimento }}</td>
-            </tr>
-            <tr>
               <td><strong>Sexo:</strong></td>
               <td class="text-capitalize">{{ paciente.genero }}</td>
             </tr>
             <tr>
               <td><strong>Endereço:</strong></td>
-              <td class="text-capitalize">{{ paciente.endereco }}</td>
+              <td class="text-capitalize">{{ paciente.address }}</td>
             </tr>
             <tr>
               <td><strong>Email:</strong></td>
@@ -33,22 +29,26 @@
               <td><strong>CPF:</strong></td>
               <td>{{ paciente.cpf }}</td>
             </tr>
-
+            
             <tr>
               <td><strong>RG:</strong></td>
               <td>{{ paciente.rg }}</td>          
             </tr>
-
+            
             <tr>
               <td><strong>Estado Civil:</strong></td>
               <td>{{ paciente.estado_civil }}</td>
             </tr>
-
+            
             <tr>
-              <td><strong>Data de Aniversário:</strong></td>
-              <td>{{ paciente.bithdate }}</td>
+              <td><strong>Idade:</strong></td>
+              <td>{{ paciente.get_age  }} ano{{ paciente.get_age|pluralize }}</td>
             </tr>
-
+            <tr>
+              <td><strong>Data de Nascimento:</strong></td>
+              <td>{{ paciente.birth_date }}</td>
+            </tr>
+            
             <tr>
               <td><strong>Telefone:</strong></td>
               <td>{{ paciente.phone_number }}</td>
@@ -110,13 +110,13 @@
           <p>Nenhum paciente encontrado.</p>
         {% endif %}
         <div>
-        
+          <a href="{% url 'paciente_update' paciente.id %}" class="btn btn-sm btn-warning">Editar</a>
           <form action="{% url 'paciente_delete' paciente.id %}" 
             onsubmit="return confirm('Tem certeza de que deseja excluir o paciente {{ paciente.full_name|title}}?')"
             method="delete" class="d-inline">
             {% csrf_token %}
             <button type="submit" class="btn btn-sm btn-danger">Excluir</button></form>
-          <a href="{% url 'paciente_list' %}" class="btn btn-sm btn-secondary">Voltar</a>
+          <a href="{% url 'paciente_list' %}" class="btn btn-sm   btn-secondary">Voltar</a>
         </div>
       </div>
     </div>

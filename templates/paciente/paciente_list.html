@@ -29,9 +29,8 @@
                     <td>{{ paciente.nome_responsavel|title }}</td>
                     <td>{{ paciente.telefone_responsavel }}</td>
                     <td>
-                        <a href="{% url 'paciente_detail' paciente.id %}" class="btn btn-sm btn-warning">Ver</a>
-                        
-                        <a href="" class="btn btn-sm btn-warning">Editar</a>
+                        <a href="{% url 'paciente_detail' paciente.id %}" class="btn btn-sm btn-primary">Ver</a>
+                        <a href="{% url 'paciente_update' paciente.id %}" class="btn btn-sm btn-warning">Editar</a>
                         <form action="{% url 'paciente_delete' paciente.id %}" 
                         onsubmit="return confirm('Tem certeza de que deseja excluir o paciente {{ paciente.full_name|title}}?')"
                         method="delete" class="d-inline">
