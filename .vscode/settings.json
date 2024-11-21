@@ -1,9 +1,14 @@
 {
-    "cSpell.language": "en,pt-BR,pt",
-    "python.analysis.indexing": true,
-    "python.analysis.autoImportCompletions": true,
-    "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter"
-      }
-    
+  "cSpell.language": "en,pt-BR,pt",
+  "python.analysis.indexing": true,
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "python.terminal.activateEnvironment": true,
+  "python.analysis.autoImportCompletions": true,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "[html][django-html][handlebars][hbs][mustache][jinja][jinja-html][nj][njk][nunjucks][twig]": {
+    "editor.defaultFormatter": "monosans.djlint"
+  },
+  "editor.formatOnSave": true,
 }

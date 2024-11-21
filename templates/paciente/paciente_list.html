@@ -1,49 +1,67 @@
 {% extends 'base.html' %}
-
 {% block title %}Pacitentes{% endblock %}
-    
 {% block content %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3 justify-content-between">
-    <h2 >Lista de Pacientes</h2>
-    <a href="{% url 'paciente_create' %}" class="btn btn-primary">Novo Paciente</a>
-</nav>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nome do Paciente</th>
-            <th>Contato do Paciente</th>
-            <th>Nome do Responsável</th>
-            <th>Contato Responsável</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% if pacientes %}
-            {% for paciente in pacientes %}
-                <tr>
-                    <td>{{ paciente.id }}</td>
-                    <td>{{ paciente.full_name }}</td>
-                    <td>{{ paciente.phone_number}}</td>
-                    <td>{{ paciente.nome_responsavel|title }}</td>
-                    <td>{{ paciente.telefone_responsavel }}</td>
-                    <td>
-                        <a href="{% url 'paciente_detail' paciente.id %}" class="btn btn-sm btn-primary">Ver</a>
-                        <a href="{% url 'paciente_update' paciente.id %}" class="btn btn-sm btn-warning">Editar</a>
-                        <form action="{% url 'paciente_delete' paciente.id %}" 
-                        onsubmit="return confirm('Tem certeza de que deseja excluir o paciente {{ paciente.full_name|title}}?')"
-                        method="delete" class="d-inline">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-sm btn-danger">Excluir</button></form>
-                    </td>
-                </tr>
-            {% endfor %}
-        {% else %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3 justify-content-between">
+        <h2>Lista de Pacientes</h2>
+        <form action="#">
+            {% csrf_token %}
+            <ul class="nav">
+                <li class="mx-1">
+                    <input placeholder="Clique para buscar todos"
+                           name="searchInput"
+                           class="form-control"
+                           type="text">
+                </li>
+                <li class="mx-1">
+                    <button type="submit" class="btn btn-success">Buscar</button>
+                </li>
+            </ul>
+        </form>
+        <div>
+            <a href="{% url 'paciente_create' %}" class="btn btn-primary">Novo Paciente</a>
+            <a class="btn btn-secondary" href="{% url 'dashboard_admin' %}">Painel de Admin</a>
+        </div>
+    </nav>
+    <table class="table">
+        <thead>
             <tr>
-                <td colspan="6">Nenhum paciente cadastrado.</td>
+                <th>ID</th>
+                <th>Nome do Paciente</th>
+                <th>Contato do Paciente</th>
+                <th>Nome do Responsável</th>
+                <th>Contato Responsável</th>
+                <th>Ações</th>
             </tr>
-        {% endif %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {% if pacientes %}
+                {% for paciente in pacientes %}
+                    <tr>
+                        <td>{{ paciente.id }}</td>
+                        <td>{{ paciente.full_name }}</td>
+                        <td>{{ paciente.phone_number }}</td>
+                        <td>{{ paciente.nome_responsavel|title }}</td>
+                        <td>{{ paciente.telefone_responsavel }}</td>
+                        <td>
+                            <a href="{% url 'paciente_detail' paciente.id %}"
+                               class="btn btn-sm btn-primary">Ver</a>
+                            <a href="{% url 'paciente_update' paciente.id %}"
+                               class="btn btn-sm btn-warning">Editar</a>
+                            <form action="{% url 'paciente_delete' paciente.id %}"
+                                  onsubmit="return confirm('Tem certeza de que deseja excluir o paciente {{ paciente.full_name|title }}?')"
+                                  method="delete"
+                                  class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="6">Nenhum paciente cadastrado.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
 {% endblock %}

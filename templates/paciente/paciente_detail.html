@@ -1,123 +1,146 @@
 <!-- profile_form.html -->
 {% extends 'base.html' %}
 {% load bootstrap %}
-
 {% block content %}
-<div class="row justify-content-center">
-  <div class="col-md-6">
-        <h1 class="text-center my-4">Detalhes do Paciente</h1>
-
-        {% if paciente %}
-          <table class="table table-bordered border-primary">
-            <tr>
-              <td><strong>Nome:</strong></td>
-              <td class="text-capitalize ">{{ paciente.full_name }} </td>
-            </tr>
-            <tr>
-              <td><strong>Sexo:</strong></td>
-              <td class="text-capitalize">{{ paciente.genero }}</td>
-            </tr>
-            <tr>
-              <td><strong>Endereço:</strong></td>
-              <td class="text-capitalize">{{ paciente.address }}</td>
-            </tr>
-            <tr>
-              <td><strong>Email:</strong></td>
-              <td>{{ paciente.email }}</td>
-            </tr>
-            <tr>
-              <td><strong>CPF:</strong></td>
-              <td>{{ paciente.cpf }}</td>
-            </tr>
-            
-            <tr>
-              <td><strong>RG:</strong></td>
-              <td>{{ paciente.rg }}</td>          
-            </tr>
-            
-            <tr>
-              <td><strong>Estado Civil:</strong></td>
-              <td>{{ paciente.estado_civil }}</td>
-            </tr>
-            
-            <tr>
-              <td><strong>Idade:</strong></td>
-              <td>{{ paciente.get_age  }} ano{{ paciente.get_age|pluralize }}</td>
-            </tr>
-            <tr>
-              <td><strong>Data de Nascimento:</strong></td>
-              <td>{{ paciente.birth_date }}</td>
-            </tr>
-            
-            <tr>
-              <td><strong>Telefone:</strong></td>
-              <td>{{ paciente.phone_number }}</td>
-            </tr>
-            <tr>
-              <td><strong>Nome do Responsável:</strong></td>
-              <td class="text-capitalize">{{ paciente.nome_responsavel }}</td>
-            </tr>
-            <tr>
-              <td><strong>Telefone do Responsável:</strong></td>
-              <td>{{ paciente.telefone_responsavel }}</td>
-            </tr>
-            <tr>
-              <td><strong>Grau de Parentesco:</strong></td>
-              <td class="text-capitalize">{{ paciente.grau_parentesco }}</td>
-            </tr>
-            <tr>
-              <td><strong>Doenças Cronicas:</strong></td>
-              <td class="text-capitalize">{{ paciente.doencas_cronicas }}</td>
-            </tr>
-            <tr>
-              <td><strong>Alergias:</strong></td>
-              <td class="text-capitalize">{{ paciente.alergias }}</td>
-            </tr>
-            <tr>
-              <td><strong>Medicamentos:</strong></td>
-              <td class="text-capitalize">{{ paciente.medicamentos }}</td>
-            </tr>
-            <tr>
-              <td><strong>Historico de Internacoes:</strong></td>
-              <td class="text-capitalize">{{ paciente.historico_internacoes }}</td>
-            </tr>
-            <tr>
-              <td><strong>Cirurgias:</strong></td>
-              <td class="text-capitalize">{{ paciente.cirurgias }}</td>         
-            </tr>
-            <tr>
-              <td><strong>Vacinas:</strong></td>
-              <td class="text-capitalize">{{ paciente.vacinas }}</td>
-            </tr>
-            <tr>
-              <td><strong>Exames:</strong></td>
-              <td class="text-capitalize">{{ paciente.exames }}</td>
-            </tr>
-            <tr>
-              <td><strong>Condicoes Cognitivas:</strong></td>
-              <td class="text-capitalize">{{ paciente.condicoes_cognitivas }}</td>
-            </tr>
-            <tr>
-              <td><strong>Alteracoes Humor:</strong></td>
-              <td class="text-capitalize">{{ paciente.alteracoes_humor }}</td>
-            </tr>
-            <tr>
-              <td><strong>Comportamento Social:</strong></td>
-              <td class="text-capitalize">{{ paciente.comportamento_social }}</td>
-            </tr>
-          </table>
-        {% else %}
-          <p>Nenhum paciente encontrado.</p>
-        {% endif %}
-        <div>
-          <a href="{% url 'paciente_update' paciente.id %}" class="btn btn-sm btn-warning">Editar</a>
-          <form action="{% url 'paciente_delete' paciente.id %}" 
-            onsubmit="return confirm('Tem certeza de que deseja excluir o paciente {{ paciente.full_name|title}}?')"
-            method="delete" class="d-inline">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-sm btn-danger">Excluir</button></form>
-          <a href="{% url 'paciente_list' %}" class="btn btn-sm   btn-secondary">Voltar</a>
-        </div>
+  <div class="d-flex justify-content-center">
+    <div>
+      <h1 class="text-center my-4">Detalhes do Paciente</h1>
+      {% if paciente %}
+        <table class="w-auto m-auto table table-sm table-bordered table-striped table-hover text-center border-primary">
+          <tr>
+            <td>
+              <strong>Nome:</strong>
+            </td>
+            <td class="text-capitalize ">{{ paciente.full_name }}</td>
+            <td>
+              <strong>Sexo:</strong>
+            </td>
+            <td class="text-capitalize">{{ paciente.genero }}</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Endereço:</strong>
+            </td>
+            <td class="text-capitalize">{{ paciente.address }}</td>
+            <td>
+              <strong>Email:</strong>
+            </td>
+            <td>{{ paciente.email }}</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>CPF:</strong>
+            </td>
+            <td>{{ paciente.cpf }}</td>
+            <td>
+              <strong>RG:</strong>
+            </td>
+            <td>{{ paciente.rg }}</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Estado Civil:</strong>
+            </td>
+            <td>{{ paciente.estado_civil }}</td>
+            <td>
+              <strong>Idade:</strong>
+            </td>
+            <td>{{ paciente.get_age }} ano{{ paciente.get_age|pluralize }}</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Data de Nascimento:</strong>
+            </td>
+            <td>{{ paciente.birth_date }}</td>
+            <td>
+              <strong>Telefone:</strong>
+            </td>
+            <td>{{ paciente.phone_number }}</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Nome do Responsável:</strong>
+            </td>
+            <td class="text-capitalize">{{ paciente.nome_responsavel }}</td>
+            <td>
+              <strong>Telefone do Responsável:</strong>
+            </td>
+            <td>{{ paciente.telefone_responsavel }}</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Grau de Parentesco:</strong>
+            </td>
+            <td class="text-capitalize">{{ paciente.grau_parentesco }}</td>
+            <td>
+              <strong>Doenças Cronicas:</strong>
+            </td>
+            <td class="text-capitalize">{{ paciente.doencas_cronicas }}</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Alergias:</strong>
+            </td>
+            <td class="text-capitalize">{{ paciente.alergias }}</td>
+            <td>
+              <strong>Medicamentos:</strong>
+            </td>
+            <td class="text-capitalize">{{ paciente.medicamentos }}</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Historico de Internacoes:</strong>
+            </td>
+            <td class="text-capitalize">{{ paciente.historico_internacoes }}</td>
+            <td>
+              <strong>Cirurgias:</strong>
+            </td>
+            <td class="text-capitalize">{{ paciente.cirurgias }}</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Vacinas:</strong>
+            </td>
+            <td class="text-capitalize">{{ paciente.vacinas }}</td>
+            <td>
+              <strong>Exames:</strong>
+            </td>
+            <td class="text-capitalize">{{ paciente.exames }}</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Condicoes Cognitivas:</strong>
+            </td>
+            <td class="text-capitalize">{{ paciente.condicoes_cognitivas }}</td>
+            <td>
+              <strong>Alteracoes Humor:</strong>
+            </td>
+            <td class="text-capitalize">{{ paciente.alteracoes_humor }}</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Comportamento Social:</strong>
+            </td>
+            <td class="text-capitalize">{{ paciente.comportamento_social }}</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+      {% else %}
+        <p>Nenhum paciente encontrado.</p>
+      {% endif %}
+      <div class="d-flex justify-content-center mt-3">
+        <a href="{% url 'paciente_update' paciente.id %}"
+           class="btn btn-sm btn-warning">Editar</a>
+        <form action="{% url 'paciente_delete' paciente.id %}"
+              onsubmit="return confirm('Tem certeza de que deseja excluir o paciente {{ paciente.full_name|title }}?')"
+              method="delete"
+              class="d-inline">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-sm btn-danger mx-2">Excluir</button>
+        </form>
+        <a href="{% url 'paciente_list' %}" class="btn btn-sm   btn-secondary">Voltar</a>
       </div>
     </div>
+  </div>
 {% endblock %}
