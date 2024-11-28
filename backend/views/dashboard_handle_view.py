@@ -1,14 +1,13 @@
+import re
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 
+@login_required
 def dashboard(request):
-    """View rendering the dashboard for the user type."""
     user = request.user
 
-    if user.is_authenticated:
-        if user.is_superuser:
-            return redirect('dashboard_admin')
-        else:
-            return redirect('dashboard_profissional')
-    else:
-        return redirect('login')
+    if user.is_superuser:
+        return redirect("dashboard_admin")
+
+    return redirect("dashboard_profissional")

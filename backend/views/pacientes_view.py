@@ -30,13 +30,14 @@ def paciente_delete(request, id):
 
 @login_required
 def paciente_list(request):
+    page_number = request.GET.get("page", 1)
     paciente_service = PacienteServices()
     search_input = request.GET.get("searchInput")
 
     if paciente_service.is_search_valid(search_input):
-        pacientes = paciente_service.get_pacientes_by_name(search_input)
+        pacientes = paciente_service.get_pacientes_by_name(search_input, page_number)
     else:
-        pacientes = paciente_service.get_all_pacientes()
+        pacientes = paciente_service.get_all_pacientes(page_number)
 
     return render(request, "paciente/paciente_list.html", {"pacientes": pacientes})
 
