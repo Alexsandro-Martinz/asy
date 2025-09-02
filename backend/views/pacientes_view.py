@@ -113,5 +113,5 @@ def paciente_update(request, id):
     return render(
         request,
         "paciente/paciente_update.html",
-        {"form": form, "birth_date": paciente.birth_date.isoformat()},
+        {"form": form, "birth_date": paciente.birth_date},
     )
